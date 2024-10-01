@@ -4,29 +4,29 @@ services:
   webserver:
     build: ./Web_server
     ports:
-      - "8080:80"             # Expose le serveur web sur le port 8080 de l'hôte
+      - "8080:80"             # Expose the web server on host port 8080
     networks:
-      - mon_reseau
+      - mon_reseau            # Connect to the specified network
     depends_on:
-      - database              # S'assure que la base de données démarre avant le serveur web
+      - database              # Ensure the database starts before the web server
 
   database:
     build: ./data_base
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydb
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword  # Set the root password for MySQL
+      MYSQL_DATABASE: mydb                # Specify the name of the database to create
+      MYSQL_USER: user                    # Set the username for MySQL
+      MYSQL_PASSWORD: password            # Set the password for the MySQL user
     networks:
-      - mon_reseau
+      - mon_reseau                        # Connect to the specified network
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql           # Persist database data in a volume
     ports:
-      - "3306:3306"           # Expose le port MySQL 3306 sur l'hôte pour permettre l'accès externe
+      - "3306:3306"                       # Expose MySQL port 3306 on the host for external access
 
 networks:
   mon_reseau:
-    driver: bridge            # Utilise le driver bridge pour le réseau Docker
+    driver: bridge                        # Use the bridge driver for the Docker network
 
 volumes:
-  db_data:
+  db_data:                               # Define a volume for database data persistence

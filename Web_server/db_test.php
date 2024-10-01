@@ -1,26 +1,26 @@
 <?php
-$servername = "database";  // Nom du service dans docker-compose.yml
-$username = "user";        // Doit correspondre à MYSQL_USER
-$password = "password";    // Doit correspondre à MYSQL_PASSWORD
-$dbname = "mydb";          // Nom de la base de données
+$servername = "database";  // Name of the service in docker-compose.yml
+$username = "user";        // Must match MYSQL_USER
+$password = "password";    // Must match MYSQL_PASSWORD
+$dbname = "mydb";          // Name of the database
 
-// Connexion à la base de données
+// Connect to the database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Vérification de la connexion
+// Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 echo "Connected successfully to the database.<br>";
 
-// Vérifier si la table `test_table` existe
+// Check if the table `test_table` exists
 $tableCheckSql = "SHOW TABLES LIKE 'test_table'";
 $result = $conn->query($tableCheckSql);
 
 if ($result && $result->num_rows == 0) {
     echo "The table 'test_table' does not exist in the database '$dbname'.<br>";
     
-    // Afficher toutes les tables existantes dans la base de données `mydb`
+    // Display all existing tables in the `mydb` database
     echo "Current tables in the database:<br>";
     $sql = "SHOW TABLES";
     $result = $conn->query($sql);
@@ -32,11 +32,11 @@ if ($result && $result->num_rows == 0) {
         echo "No tables found in the database '$dbname'.<br>";
     }
     
-    // Terminer le script si la table `test_table` n'existe pas
+    // Terminate the script if the `test_table` does not exist
     die("Please make sure the table 'test_table' is created in the database before running this script.<br>");
 }
 
-// Insertion d'une donnée dans la table `test_table`
+// Insert a record into the `test_table`
 $sql = "INSERT INTO test_table (name) VALUES ('TestUser')";
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully in 'test_table'.<br>";
@@ -44,7 +44,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error . "<br>";
 }
 
-// Sélection et affichage des données de la table `test_table`
+// Select and display data from the `test_table`
 $sql = "SELECT id, name FROM test_table";
 $result = $conn->query($sql);
 
@@ -57,6 +57,6 @@ if ($result->num_rows > 0) {
     echo "0 results in 'test_table'.<br>";
 }
 
-// Fermeture de la connexion
+// Close the connection
 $conn->close();
 ?>
