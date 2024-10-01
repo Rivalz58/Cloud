@@ -1,31 +1,31 @@
-### Détails des Fichiers
+### File Details
 
-- **Data_base/Dockerfile** : Définit l'image Docker pour le serveur MySQL. Les variables d'environnement pour la configuration de la base de données sont spécifiées, et un script d'initialisation est copié pour créer la base de données et la table.
+- **Data_base/Dockerfile**: Defines the Docker image for the MySQL server. Environment variables for database configuration are specified, and an initialization script is copied to create the database and the table.
 
-- **Data_base/init.sql** : Contient les instructions SQL pour créer la base de données `mydb` et la table `test_table`.
+- **Data_base/init.sql**: Contains the SQL instructions to create the database `mydb` and the table `test_table`.
 
-- **Web_server/Dockerfile** : Définit l'image Docker pour le serveur web Apache avec PHP. Il active l'extension MySQL pour PHP et copie les fichiers HTML et PHP nécessaires dans le répertoire web.
+- **Web_server/Dockerfile**: Defines the Docker image for the Apache web server with PHP. It enables the MySQL extension for PHP and copies the necessary HTML and PHP files into the web directory.
 
-- **Web_server/db_test.php** : Script PHP pour tester la connexion à la base de données et effectuer des opérations de base (insertion et sélection de données).
+- **Web_server/db_test.php**: PHP script to test the database connection and perform basic operations (insertion and selection of data).
 
-- **Web_server/index.html** : Page d'accueil simple qui affiche un message et un lien pour tester la connexion à la base de données.
+- **Web_server/index.html**: A simple homepage that displays a message and a link to test the database connection.
 
-- **docker-compose.yml** : Fichier de configuration Docker Compose qui définit les services `webserver` et `database`, les lie à un réseau et expose les ports nécessaires.
+- **docker-compose.yml**: Docker Compose configuration file that defines the `webserver` and `database` services, links them to a network, and exposes the necessary ports.
 
-### Instructions pour Exécuter le Projet
+### Instructions to Run the Project
 
-1. **Installation de Docker** :
-   - Assurez-vous que Docker et Docker Compose sont installés sur votre machine. Vous pouvez télécharger Docker [ici](https://www.docker.com/products/docker-desktop).
+1. **Install Docker**:
+   - Ensure that Docker and Docker Compose are installed on your machine. You can download Docker [here](https://www.docker.com/products/docker-desktop).
 
-2. **Construire et Lancer les Conteneurs** :
-   - Ouvrez une console dans le répertoire du projet.
-   - Exécutez la commande suivante pour construire et démarrer les conteneurs :
+2. **Build and Start the Containers**:
+   - Open a terminal in the project directory.
+   - Run the following command to build and start the containers:
      ```bash
      docker-compose up --build
      ```
 
-3. **Accéder au Serveur Web** :
-   - Ouvrez un navigateur et allez à `http://localhost:8080` pour voir la page d'accueil.
+3. **Access the Web Server**:
+   - Open a web browser and go to `http://localhost:8080` to see the homepage.
 
-4. **Tester la Connexion à la Base de Données** :
-   - Cliquez sur le lien "Test DB Connection" sur la page d'accueil pour exécuter le script PHP qui teste la connexion à la base de données.
+4. **Test the Database Connection**:
+   - Click on the "Test DB Connection" link on the homepage to run the PHP script that tests the database connection.
