@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  webserver:
+    build: ./Web_server
+    ports:
+      - "8080:80"             # Expose le serveur web sur le port 8080 de l'hôte
+    networks:
+      - mon_reseau
+    depends_on:
+      - database              # S'assure que la base de données démarre avant le serveur web
+
+  database:
+    build: ./data_base
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    networks:
+      - mon_reseau
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"           # Expose le port MySQL 3306 sur l'hôte pour permettre l'accès externe
+
+networks:
+  mon_reseau:
+    driver: bridge            # Utilise le driver bridge pour le réseau Docker
+
+volumes:
+  db_data:
